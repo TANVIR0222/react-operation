@@ -9,9 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StateRouteImport } from './routes/state'
+import { Route as PerformanceRouteImport } from './routes/performance'
 import { Route as InteractivityRouteImport } from './routes/interactivity'
 import { Route as IndexRouteImport } from './routes/index'
 
+const StateRoute = StateRouteImport.update({
+  id: '/state',
+  path: '/state',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerformanceRoute = PerformanceRouteImport.update({
+  id: '/performance',
+  path: '/performance',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const InteractivityRoute = InteractivityRouteImport.update({
   id: '/interactivity',
   path: '/interactivity',
@@ -26,31 +38,53 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/interactivity': typeof InteractivityRoute
+  '/performance': typeof PerformanceRoute
+  '/state': typeof StateRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/interactivity': typeof InteractivityRoute
+  '/performance': typeof PerformanceRoute
+  '/state': typeof StateRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/interactivity': typeof InteractivityRoute
+  '/performance': typeof PerformanceRoute
+  '/state': typeof StateRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/interactivity'
+  fullPaths: '/' | '/interactivity' | '/performance' | '/state'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/interactivity'
-  id: '__root__' | '/' | '/interactivity'
+  to: '/' | '/interactivity' | '/performance' | '/state'
+  id: '__root__' | '/' | '/interactivity' | '/performance' | '/state'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   InteractivityRoute: typeof InteractivityRoute
+  PerformanceRoute: typeof PerformanceRoute
+  StateRoute: typeof StateRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/state': {
+      id: '/state'
+      path: '/state'
+      fullPath: '/state'
+      preLoaderRoute: typeof StateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/performance': {
+      id: '/performance'
+      path: '/performance'
+      fullPath: '/performance'
+      preLoaderRoute: typeof PerformanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/interactivity': {
       id: '/interactivity'
       path: '/interactivity'
@@ -71,6 +105,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   InteractivityRoute: InteractivityRoute,
+  PerformanceRoute: PerformanceRoute,
+  StateRoute: StateRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
