@@ -1,222 +1,183 @@
-Welcome to your new TanStack Start app!
+# ⚛️ React Operation
 
-# Getting Started
+An interactive, hands-on React learning platform built with **TanStack Start**. Each chapter covers a core React concept with live, editable demos — not just code snippets.
 
-To run this application:
+---
+
+## 📚 Chapters
+
+| #   | Route            | Topic               | What You'll Learn                                                  |
+| --- | ---------------- | ------------------- | ------------------------------------------------------------------ |
+| 01  | `/interactivity` | **Interactivity**   | Event binding, bubbling & capture, stopPropagation, preventDefault |
+| 02  | `/performance`   | **Performance**     | React.memo, useMemo, useCallback, Suspense & lazy loading          |
+| 03  | `/state`         | **State & Context** | Prop drilling, createContext, useContext, Provider pattern         |
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer         | Technology                                                                      |
+| ------------- | ------------------------------------------------------------------------------- |
+| Framework     | [TanStack Start](https://tanstack.com/start) + [React 19](https://react.dev)    |
+| Router        | [TanStack Router](https://tanstack.com/router) (file-based)                     |
+| Styling       | [Tailwind CSS v4](https://tailwindcss.com/) + Custom CSS design system          |
+| UI Components | [shadcn/ui](https://ui.shadcn.com/) (New York style)                            |
+| Bundler       | [Vite 8](https://vite.dev/)                                                     |
+| Server        | [Nitro](https://nitro.build/)                                                   |
+| Testing       | [Vitest](https://vitest.dev/) + [Testing Library](https://testing-library.com/) |
+| Compiler      | [React Compiler](https://react.dev/learn/react-compiler) (Babel plugin)         |
+| Linting       | ESLint 9 + Prettier + [Commitlint](https://commitlint.js.org/)                  |
+| Git Hooks     | [Husky](https://typicode.github.io/husky/) + lint-staged                        |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) v18+ or [Bun](https://bun.sh/)
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/TANVIR0222/react-operation.git
+cd react-operation
+
+# Install dependencies
 bun install
+# or
+npm install
+```
+
+### Development
+
+```bash
+# Start the dev server on port 3000
 bun --bun run dev
+# or
+npm run dev
 ```
 
-# Building For Production
+Open [http://localhost:3000](http://localhost:3000) to view the app.
 
-To build this application for production:
+---
 
-```bash
-bun --bun run build
+## 📁 Project Structure
+
+```
+src/
+├── components/
+│   ├── Header.tsx          # Global navigation header
+│   └── ui/
+│       └── button.tsx      # shadcn/ui Button component
+├── lib/
+│   └── utils.ts            # Utility functions (cn helper)
+├── routes/
+│   ├── __root.tsx           # Root layout (Header + Outlet)
+│   ├── index.tsx            # Home page — chapter overview
+│   ├── interactivity.tsx    # Chapter 01 — Events & binding
+│   ├── performance.tsx      # Chapter 02 — Memoisation & optimisation
+│   └── state.tsx            # Chapter 03 — Context & state management
+├── router.tsx               # TanStack Router configuration
+├── routeTree.gen.ts         # Auto-generated route tree
+└── styles.css               # Global styles & design system
 ```
 
-## Testing
+---
 
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
+## 📜 Available Scripts
 
-```bash
-bun --bun run test
-```
+| Script    | Command           | Description                       |
+| --------- | ----------------- | --------------------------------- |
+| `dev`     | `npm run dev`     | Start dev server on port 3000     |
+| `build`   | `npm run build`   | Production build                  |
+| `preview` | `npm run preview` | Preview production build          |
+| `test`    | `npm run test`    | Run tests with Vitest             |
+| `lint`    | `npm run lint`    | Lint with ESLint                  |
+| `format`  | `npm run format`  | Format with Prettier + ESLint fix |
+| `check`   | `npm run check`   | Check formatting with Prettier    |
 
-## Styling
+---
 
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
+## 🎨 Design System
 
-### Removing Tailwind CSS
+The app uses a custom CSS design system with CSS custom properties:
 
-If you prefer not to use Tailwind CSS:
+- **Fonts** — `Fraunces` (display/serif) + `Manrope` (body/sans)
+- **Home Page** — Black & white monochrome theme with bold typography
+- **Chapter Pages** — Sea-green/lagoon palette (`--lagoon`, `--palm`, `--sea-ink`)
+- **Components** — Glassmorphic cards (`.island-shell`), feature cards (`.feature-card`)
+- **Animations** — Rise-in entrance animations, smooth hover transitions
+- **Header** — Sticky glassmorphic nav with active route indicators
+- **Responsive** — Mobile-first with breakpoints at 640px and 768px
 
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Uninstall the packages: `bun install @tailwindcss/vite tailwindcss -D`
+---
 
-## Linting & Formatting
+## 🧩 Adding a New Chapter
 
-This project uses [eslint](https://eslint.org/) and [prettier](https://prettier.io/) for linting and formatting. Eslint is configured using [tanstack/eslint-config](https://tanstack.com/config/latest/docs/eslint). The following scripts are available:
-
-```bash
-bun --bun run lint
-bun --bun run format
-bun --bun run check
-```
-
-## Deploy with Nitro
-
-This project uses Nitro as a generic server adapter, so it can run on any Node-compatible host.
-
-```bash
-npm run build
-node dist/server/index.mjs
-```
-
-The build output is a self-contained Node server. To deploy, push the `dist/` directory to your host (Render, Fly.io, your own VPS, etc.) and run the server command above.
-
-For host-specific presets (Vercel, Netlify, Cloudflare, AWS Lambda, etc.) and tuning, see https://v3.nitro.build/deploy.
-
-## Shadcn
-
-Add components using the latest version of [Shadcn](https://ui.shadcn.com/).
-
-```bash
-pnpm dlx shadcn@latest add button
-```
-
-## Routing
-
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
+1. Create a new file in `src/routes/` (e.g., `hooks.tsx`)
+2. TanStack Router will auto-generate the route
+3. Add the route to the `NAV_ITEMS` array in `src/components/Header.tsx`
+4. Add a topic card to the `TOPICS` array in `src/routes/index.tsx`
 
 ```tsx
-import {Link} from '@tanstack/react-router';
-```
-
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you render `{children}` in the `shellComponent`.
-
-Here is an example layout that includes a header:
-
-```tsx
-import {HeadContent, Scripts, createRootRoute} from '@tanstack/react-router';
-
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      {charSet: 'utf-8'},
-      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {title: 'My App'},
-    ],
-  }),
-  shellComponent: ({children}) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-});
-```
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-## Server Functions
-
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
-
-```tsx
-import {createServerFn} from '@tanstack/react-start';
-
-const getServerTime = createServerFn({
-  method: 'GET',
-}).handler(async () => {
-  return new Date().toISOString();
-});
-
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState('');
-
-  useEffect(() => {
-    getServerTime().then(setTime);
-  }, []);
-
-  return <div>Server time: {time}</div>;
-}
-```
-
-## API Routes
-
-You can create API routes by using the `server` property in your route definitions:
-
-```tsx
-import {createFileRoute} from '@tanstack/react-router';
-import {json} from '@tanstack/react-start';
-
-export const Route = createFileRoute('/api/hello')({
-  server: {
-    handlers: {
-      GET: () => json({message: 'Hello, World!'}),
-    },
-  },
-});
-```
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
+// src/routes/hooks.tsx
 import {createFileRoute} from '@tanstack/react-router';
 
-export const Route = createFileRoute('/people')({
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people');
-    return response.json();
-  },
-  component: PeopleComponent,
+export const Route = createFileRoute('/hooks')({
+  component: HooksPage,
 });
 
-function PeopleComponent() {
-  const data = Route.useLoaderData();
+function HooksPage() {
   return (
-    <ul>
-      {data.results.map(person => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ul>
+    <div className="mx-auto p-8">
+      <h1 className="text-3xl font-bold">React Hooks</h1>
+      {/* Your content here */}
+    </div>
   );
 }
 ```
 
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
+---
 
-# Demo files
+## 🏗️ Building for Production
 
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
+```bash
+# Build
+npm run build
 
-# Learn More
+# Run the production server
+node dist/server/index.mjs
+```
 
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
+### Deployment
 
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
+The build output is a self-contained Node server. Deploy the `dist/` directory to any Node-compatible host:
+
+- **Vercel** / **Netlify** / **Cloudflare** — Use [Nitro presets](https://v3.nitro.build/deploy)
+- **Fly.io** / **Render** / **VPS** — Run `node dist/server/index.mjs`
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/new-chapter`)
+3. Commit your changes using [conventional commits](https://www.conventionalcommits.org/) (`git commit -m 'feat: add hooks chapter'`)
+4. Push to the branch (`git push origin feature/new-chapter`)
+5. Open a Pull Request
+
+> Commits are enforced with [commitlint](https://commitlint.js.org/) + Husky hooks.
+
+---
+
+## 📄 License
+
+This project is private and not licensed for public distribution.
+
+---
+
+<p align="center">
+  Made with ☕ by <a href="https://github.com/TANVIR0222">TANVIR</a>
+</p>
