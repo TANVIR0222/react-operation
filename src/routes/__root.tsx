@@ -1,7 +1,13 @@
 import {TanStackDevtools} from '@tanstack/react-devtools';
-import {HeadContent, Scripts, createRootRoute} from '@tanstack/react-router';
+import {
+  HeadContent,
+  Outlet,
+  Scripts,
+  createRootRoute,
+} from '@tanstack/react-router';
 import {TanStackRouterDevtoolsPanel} from '@tanstack/react-router-devtools';
 
+import Header from '../components/Header';
 import appCss from '../styles.css?url';
 
 export const Route = createRootRoute({
@@ -26,7 +32,22 @@ export const Route = createRootRoute({
     ],
   }),
   shellComponent: RootDocument,
+  component: RootComponent,
 });
+
+function RootComponent() {
+  return (
+    <>
+      <Header />
+      <main
+        className="page-wrap"
+        style={{paddingTop: '2rem', paddingBottom: '4rem'}}
+      >
+        <Outlet />
+      </main>
+    </>
+  );
+}
 
 function RootDocument({children}: {children: React.ReactNode}) {
   return (
